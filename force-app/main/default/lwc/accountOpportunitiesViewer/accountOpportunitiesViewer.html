@@ -2,7 +2,7 @@
     <lightning-card title="Opportunités du Compte" icon-name="standard:opportunity">
         <div class=slds-max-large-size_xx-large>
             <lightning-button class="slds-m-bottom_small" label="Refresh" onclick={handleRefresh} variant="brand"></lightning-button>
-            <template lwc:if={opportunities}>
+            <template lwc:if={opportunities.data}>
                 <lightning-datatable data={opportunities.data}
                                      columns={columns}
                                      key-field="Id"
