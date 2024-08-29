@@ -12,7 +12,7 @@ export default class AccountOpportunitiesViewer extends LightningElement {
         { label: 'Phase', fieldName: 'StageName', type: 'text' }
     ];
 
-    @wire(getOpportunities, { recordId: '$accountId' }) //error
+    @wire(getOpportunities, { accountId: '$recordId' }) //error
     wiredOpportunities({ error, data }) {
         if (data) {
             this.opportunities = data;
