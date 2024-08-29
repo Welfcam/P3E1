@@ -24,7 +24,7 @@ export default class AccountOpportunitiesViewer extends LightningElement {
     //     }
     // }
 
-    handleRafraichir() {
+    handleRefresh() {
     refreshApex(this.opportunities)
     }
 }
