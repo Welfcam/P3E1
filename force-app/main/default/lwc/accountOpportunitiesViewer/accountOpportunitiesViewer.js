@@ -1,5 +1,6 @@
 import { LightningElement, api, wire, track } from 'lwc';
 import getOpportunities from '@salesforce/apex/AccountOpportunitiesController.getOpportunities';
+import { refreshApex } from "@salesforce/apex";
 
 export default class AccountOpportunitiesViewer extends LightningElement {
     @api recordId;
@@ -12,15 +13,18 @@ export default class AccountOpportunitiesViewer extends LightningElement {
         { label: 'Phase', fieldName: 'StageName', type: 'text' }
     ];
 
-    @wire(getOpportunities, { accountId: '$recordId' }) //error
-    wiredOpportunities({ error, data }) {
-        if (data) {
-            this.opportunities = data;
-        } else if (error) {
-            this.error = error;
-            this.opportunities = undefined;
-        }
+    @wire(getOpportunities, { accountId: '$recordId' })
+    opportunities;
+    // ({ error, data }) {
+    //     if (data) {
+    //         this.opportunities = data;
+    //     } else if (error) {
+    //         this.error = error;
+    //         this.opportunities = undefined;
+    //     }
+    // }
+
+    handleRafraichir() {
+    refreshApex(this.opportunities)
     }
-
-
 }
