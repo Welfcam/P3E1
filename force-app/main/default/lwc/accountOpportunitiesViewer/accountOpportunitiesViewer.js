@@ -8,10 +8,10 @@ export default class AccountOpportunitiesViewer extends LightningElement {
     @track error; //= {};
     wiredOpportunitiesResult;
     columns = [
-        { label: 'Nom Opportunité', fieldName: 'Name', type: 'text' },
-        { label: 'Montant', fieldName: 'Amount', type: 'currency' },
-        { label: 'Date de Clôture', fieldName: 'CloseDate', type: 'date' },
-        { label: 'Phase', fieldName: 'StageName', type: 'text' }
+        { label: 'Opportunity Name', fieldName: 'Name', type: 'text' },
+        { label: 'Amount', fieldName: 'Amount', type: 'currency' },
+        { label: 'Close Date', fieldName: 'CloseDate', type: 'date' },
+        { label: 'Stage', fieldName: 'StageName', type: 'text' }
     ];
 
     @wire(getOpportunities, { accountId: '$recordId' }) 
@@ -23,10 +23,10 @@ export default class AccountOpportunitiesViewer extends LightningElement {
                 this.error = undefined;
             } else {
                 this.opportunities = undefined;
-                this.error = "Aucune opportunité n'est associée à ce compte";   
+                this.error = "No opportunities are associated with this account.";   
             }
         } else {
-            this.error = "Une erreur s'est produite lors du chargement des opportunités."
+            this.error = "An error occurred while loading opportunities."
             this.opportunities = undefined;
         }
     }
