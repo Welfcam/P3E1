@@ -1,9 +1,7 @@
 public with sharing class AccountCasesController {
 
     @AuraEnabled
-    public static void findCasesBySubject(){
-
+    public static List<Case> findCasesBySubject(String subjectSearchTerm, Id accountId) {
+        return CaseSelector.getCasesByAccountIdAndSubject(subjectSearchTerm, accountId);
     }
-
-
 }
