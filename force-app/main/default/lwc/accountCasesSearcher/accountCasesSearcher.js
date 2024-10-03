@@ -2,9 +2,9 @@ import { LightningElement, track, api } from 'lwc';
 import findCasesBySubject from '@salesforce/apex/AccountCasesController.findCasesBySubject';
 
 const COLUMNS = [
-    { label: 'Sujet', fieldName: 'Subject', type: 'text' },
-    { label: 'Statut', fieldName: 'Status', type: 'text' },
-    { label: 'Priorité', fieldName: 'Priority', type: 'text' },
+    { label: 'Subject', fieldName: 'Subject', type: 'text' },
+    { label: 'Status', fieldName: 'Status', type: 'text' },
+    { label: 'Priority', fieldName: 'Priority', type: 'text' },
 ];
 
 export default class AccountCaseSearchComponent extends LightningElement {
@@ -26,11 +26,11 @@ export default class AccountCaseSearchComponent extends LightningElement {
                     this.error = undefined;
                 } else {
                     this.cases = undefined;
-                    this.error = "There are no cases matching your search"
+                    this.error = 'There are no cases matching your search.';
                 }
             })
             .catch(error => {
-                this.error = 'Une erreur est survenue lors de la recherche des cases.';
+                this.error = 'An error occurred whil searching for cases.';
             });
     }
 }
