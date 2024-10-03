@@ -21,8 +21,13 @@ export default class AccountCaseSearchComponent extends LightningElement {
     handleSearch() {
         findCasesBySubject({ accountId: this.recordId, subjectSearchTerm: this.searchTerm })
             .then(result => {
-                this.cases = result;
-                this.error = undefined;
+                if(result.length > 0) {
+                    this.cases = result;
+                    this.error = undefined;
+                } else {
+                    this.cases = undefined;
+                    this.error = "There are no cases matching your search"
+                }
             })
             .catch(error => {
                 this.error = 'Une erreur est survenue lors de la recherche des cases.';
