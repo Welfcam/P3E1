@@ -1,13 +1,25 @@
 <template>
     <lightning-card title="Account Opportunities" icon-name="standard:opportunity">
-        <div class=slds-max-large-size_xx-large>
-            <lightning-button class="slds-m-bottom_small" label="Refresh" onclick={handleRefresh} variant="brand"></lightning-button>
-            <template lwc:if={opportunities}>
-                <lightning-datatable data={opportunities} 
-                                     columns={columns}
-                                     key-field="Id"
-                                     class="slds-theme_default">
-                </lightning-datatable>
+        <div class=slds-p-around_small>
+            <div class="slds-m-bottom_xx-small">
+                <lightning-button label="Refresh" 
+                                  onclick={handleRefresh} 
+                                  variant="brand">
+                </lightning-button>
+            </div>
+            <div>
+                <template lwc:if={opportunities}>
+                    <lightning-datatable data={opportunities} 
+                                         columns={columns}
+                                         hide-checkbox-column
+                                         key-field="Id"
+                                         class="slds-theme_default">
+                    </lightning-datatable>
+                </template>
+            <template lwc:elseif={emptyTable}>
+                <div class="slds-box slds-theme_shade" role="contentinfo">
+                    <h2>{emptyTable}</h2>
+                </div>
             </template>
             <template lwc:else>
                 <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="contentinfo">
@@ -15,6 +27,7 @@
                     <h2>{error}</h2>
                 </div>
             </template>
+            </div>
         </div>
     </lightning-card>
 </template>

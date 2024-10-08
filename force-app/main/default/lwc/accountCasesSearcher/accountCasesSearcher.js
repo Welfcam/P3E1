@@ -12,6 +12,7 @@ export default class AccountCaseSearchComponent extends LightningElement {
     @track cases;
     @track error;
     searchTerm = '';
+    noMatch;
     columns = COLUMNS;
 
     updateSearchTerm(event) {
@@ -23,14 +24,16 @@ export default class AccountCaseSearchComponent extends LightningElement {
             .then(result => {
                 if(result.length > 0) {
                     this.cases = result;
+                    this.noMatch = undefined;
                     this.error = undefined;
                 } else {
+                    this.noMatch = 'There are no cases matching your search.'
                     this.cases = undefined;
-                    this.error = 'There are no cases matching your search.';
+                    this.error = undefined;
                 }
             })
             .catch(error => {
-                this.error = 'An error occurred whil searching for cases.';
+                this.error = 'An error occurred while searching for cases.';
             });
     }
 }

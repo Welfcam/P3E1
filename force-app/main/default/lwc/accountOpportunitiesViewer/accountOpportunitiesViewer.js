@@ -7,6 +7,7 @@ export default class AccountOpportunitiesViewer extends LightningElement {
     @track opportunities;
     @track error; //= {};
     wiredOpportunitiesResult;
+    emptyTable;
     columns = [
         { label: 'Opportunity Name', fieldName: 'Name', type: 'text' },
         { label: 'Amount', fieldName: 'Amount', type: 'currency' },
@@ -21,13 +22,16 @@ export default class AccountOpportunitiesViewer extends LightningElement {
             if(result.data.length>0) {
                 this.opportunities = result.data;
                 this.error = undefined;
+                this.emptyTable = undefined;
             } else {
                 this.opportunities = undefined;
-                this.error = "No opportunities are associated with this account.";   
+                this.error = undefined;
+                this.emptyTable = "No opportunities are associated with this account.";   
             }
         } else {
             this.error = "An error occurred while loading opportunities."
             this.opportunities = undefined;
+            this.emptyTable = undefined;
         }
     }
 
