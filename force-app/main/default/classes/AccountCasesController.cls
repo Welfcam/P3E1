@@ -1,3 +1,5 @@
+
+//la méthode findCasesBySubject retourne le résultat de la méthode getCasesByAccountIdAndSubject de la classe CaseSelector
 public with sharing class AccountCasesController {
 
     @AuraEnabled
