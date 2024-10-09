@@ -1,24 +1,37 @@
 <template>
-    <lightning-card title="Recherche de Cas par Sujet" icon-name="standard:case">
-        <div class="slds-p-around_medium">
-            <lightning-input label="Rechercher par Sujet"
-                             value={searchTerm}
-                             onchange={updateSearchTerm}>
-            </lightning-input>
-            <lightning-button label="Rechercher"
+    <!-- La lightning card affiche une barre de recherche de cas par sujet et un bouton pour lancer la recherche -->
+    <lightning-card title="Search Cases by Subject" icon-name="standard:case">
+        <div class="slds-p-around_small">
+            <div class="slds-m-bottom_xx-small">
+                <!-- Barre de recherche -->
+                <lightning-input label="Search by Subject"
+                                 value={searchTerm}
+                                 onchange={updateSearchTerm}>
+                </lightning-input>
+            </div>
+            <div class="slds-m-bottom_xx-small">
+                <!-- Bouton de recherche -->
+                <lightning-button label="Search"
                               variant="brand"
-                              onclick={handleSearch}
-                              class="slds-m-top_small">
-            </lightning-button>
-        </div>
-        <template if:true={cases}>
-            <lightning-datatable data={cases}
+                              onclick={handleSearch}>
+                </lightning-button>
+            </div>
+            <!-- Si des cas correspondent à la recherche, une lightning datatable est affichée -->
+            <template lwc:if={cases}>
+                <lightning-datatable data={cases}
                                  columns={columns}
+                                 hide-checkbox-column
                                  key-field="Id">
-            </lightning-datatable>
-        </template>
-        <template if:true={error}>
-            <p class="slds-p-around_medium slds-text-color_error">{error}</p>
-        </template>
+                </lightning-datatable>
+            </template>
+            <!-- Si aucun cas ne correspond à la recherche, un message d'information est affiché -->
+            <template lwc:elseif={noMatch}>
+                <p class="slds-box slds-theme_shade">{noMatch}</p>
+            </template>
+            <!-- S'il y a une erreur, un message d'erreur est affiché -->
+            <template lwc:elseif={error}>
+                <p class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error">{error}</p>
+            </template>
+        </div>
     </lightning-card>
 </template>
