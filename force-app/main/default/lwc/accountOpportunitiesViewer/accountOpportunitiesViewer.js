@@ -1,22 +1,17 @@
-//Import de la classe LightningElement et des décorateurs
 import { LightningElement, api, wire, track } from 'lwc';
-//Import de la méthode Apex getOpportunities
 import getOpportunities from '@salesforce/apex/AccountOpportunitiesController.getOpportunities';
 //Import de la méthode refreshApex
 import { refreshApex } from "@salesforce/apex";
 
 export default class AccountOpportunitiesViewer extends LightningElement {
-    //récupère la propriété publique recordId (ID de la page active)
     @api recordId;
-    //suit les propriétés de opportunities
     @track opportunities;
-    //suit les propriétés de error
-    @track error; //= {};
+    @track error;
     //création d'une variable wiredOppotunitiesResult pour récupérer les données de getOpportunities (data et error)
     wiredOpportunitiesResult;
     //création d'une variable pour afficher une message informatif lorsque getOpportunities ne renvoie aucun résultat
     emptyTable;
-    //définit la structure des colonnes de la lightning datatable (champs, noms et type des données à afficher)
+    //définit la structure des colonnes de la lightning datatable
     columns = [
         { label: 'Opportunity Name', fieldName: 'Name', type: 'text' },
         { label: 'Amount', fieldName: 'Amount', type: 'currency' },
@@ -28,7 +23,7 @@ export default class AccountOpportunitiesViewer extends LightningElement {
     @wire(getOpportunities, { accountId: '$recordId' })
     //la fonction wiredOpportunities récupère en paramètre les résultas de la fonction Apex getOpportunities
     wiredOpportunities (result) {
-        //Affecte le résultat de la fonction Apex getOpporutinites à la viariable wiredOpportunitiesResult
+        //Affecte le résultat de la fonction Apex getOpporutinites à la variable wiredOpportunitiesResult
         this.wiredOpportunitiesResult = result;
         //Si les données de result sont >0 (au moins une opportunité), les opportinités sont affichées
         if (result.data) {

@@ -1,4 +1,3 @@
-//Import de la classe Lightning element et des décorateurs
 import { LightningElement, track, api } from 'lwc';
 //Import de la méthode findCaseBySubject de AccountCaseController
 import findCasesBySubject from '@salesforce/apex/AccountCasesController.findCasesBySubject';
@@ -11,17 +10,13 @@ const COLUMNS = [
 ];
 
 export default class AccountCaseSearchComponent extends LightningElement {
-    //récupère la propriété publique recordId (ID de la page active)
     @api recordId;
-    //suit les propriétés de cases
     @track cases;
-    //suit les propriétés de error
     @track error;
     //variable à laquelle sera affectée la valeur entrée par l'utilisateur
     searchTerm = '';
     //variable à laquelle sera affecté le message d'information en cas de recherche sans résultat
     noMatch;
-    //variable columns utilisée dans le HTML
     columns = COLUMNS;
 
     //permet de mettre à jour la valeur de searchTerm au moment de la saisie par l'utilsateur dans la barre de recherche
@@ -29,7 +24,7 @@ export default class AccountCaseSearchComponent extends LightningElement {
         this.searchTerm = event.target.value;
     }
 
-    //Gère ce qu'il se passe lorsque l'utilsateur clique sur le bouton Rechercher
+    //Gère ce qu'il se passe lorsque l'utilisateur clique sur le bouton Rechercher
     handleSearch() {
         //Appelle la fonction Apex findCasesBySubject
         findCasesBySubject({ accountId: this.recordId, subjectSearchTerm: this.searchTerm })
